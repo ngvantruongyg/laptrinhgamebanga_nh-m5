@@ -1,0 +1,2 @@
+su dung git diff 
+toi dang dung o vi tri nhanh con.
