@@ -1,0 +1,15 @@
+import javax.swing.*;
+
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Chicken Invaders Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+        
+        // Thêm giao diện đăng nhập
+        frame.add(new LoginPanel(frame));
+        
+        frame.setVisible(true);
+    }
+}
