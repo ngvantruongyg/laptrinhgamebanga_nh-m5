@@ -7,7 +7,6 @@ public class Main {
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         
-        // Thêm giao diện đăng nhập
         frame.add(new LoginPanel(frame));
         
         frame.setVisible(true);
