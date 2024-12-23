@@ -1,0 +1,44 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class Chicken {
+    private int x, y;
+    private int width = 50, height = 50;
+    private int xSpeed, ySpeed;
+    private Image image;
+    
+    public Chicken(int x, int y) {
+        this.x = x;
+        this.y = y;
+
+        // Tải hình ảnh cho gà
+        this.image = new ImageIcon("src/resources/ga.jpg").getImage(); 
+
+        // Tạo tốc độ di chuyển ngẫu nhiên
+        this.xSpeed = (Math.random() < 0.5) ? 1 : -1; // Di chuyển trái hoặc phải
+        this.ySpeed = 1; // Gà di chuyển xuống dưới
+    }
+
+    public void move() {
+        // Di chuyển gà trong khoảng cách và xử lý nếu chạm biên
+        if (x <= 0 || x >= 800 - width) { // Nếu chạm vào biên trái hoặc phải
+            xSpeed = -xSpeed; // Đảo chiều di chuyển
+        }
+        
+        if (y >= 600 - height) { // Nếu gà chạm biên dưới
+            ySpeed = -ySpeed; // Đảo chiều di chuyển lên
+        }
+
+        // Cập nhật vị trí gà
+        x += xSpeed;
+        y += ySpeed;
+    }
+
+    public void draw(Graphics g) {
+        g.drawImage(image, x, y, width, height, null); // Vẽ hình ảnh gà
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+}
