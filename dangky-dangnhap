@@ -1,1 +1,93 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.HashMap;
 
+public class LoginPanel extends JPanel implements ActionListener {
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JButton loginButton, registerButton;
+    private JLabel messageLabel;
+
+    // Sử dụng HashMap để lưu tài khoản (username, password)
+    private HashMap<String, String> userAccounts = new HashMap<>();
+
+    private JFrame parentFrame;
+
+    public LoginPanel(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
+
+        this.setLayout(null);
+
+        JLabel titleLabel = new JLabel("Login or Register", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setBounds(200, 30, 400, 30);
+        this.add(titleLabel);
+
+        JLabel usernameLabel = new JLabel("Username:");
+        usernameLabel.setBounds(250, 100, 100, 30);
+        this.add(usernameLabel);
+
+        usernameField = new JTextField();
+        usernameField.setBounds(350, 100, 200, 30);
+        this.add(usernameField);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setBounds(250, 150, 100, 30);
+        this.add(passwordLabel);
+
+        passwordField = new JPasswordField();
+        passwordField.setBounds(350, 150, 200, 30);
+        this.add(passwordField);
+
+        loginButton = new JButton("Login");
+        loginButton.setBounds(250, 200, 140, 30);
+        loginButton.addActionListener(this);
+        this.add(loginButton);
+
+        registerButton = new JButton("Register");
+        registerButton.setBounds(410, 200, 140, 30);
+        registerButton.addActionListener(this);
+        this.add(registerButton);
+
+        messageLabel = new JLabel("", SwingConstants.CENTER);
+        messageLabel.setBounds(250, 250, 300, 30);
+        messageLabel.setForeground(Color.RED);
+        this.add(messageLabel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String username = usernameField.getText().trim();
+        String password = new String(passwordField.getPassword()).trim();
+
+        // Kiểm tra thông tin hợp lệ
+        if (username.isEmpty() || password.isEmpty()) {
+            messageLabel.setText("Username and Password cannot be empty!");
+            return;
+        }
+
+        if (e.getSource() == registerButton) {
+            if (userAccounts.containsKey(username)) {
+                messageLabel.setText("Username already exists!");
+            } else {
+                userAccounts.put(username, password);
+                messageLabel.setText("Registration successful!");
+            }
+        } else if (e.getSource() == loginButton) {
+            if (userAccounts.containsKey(username) && userAccounts.get(username).equals(password)) {
+                messageLabel.setText("Login successful!");
+                startGame();
+            } else {
+                messageLabel.setText("Invalid username or password!");
+        }
+                }
+            }
+        
+            private void startGame() {
+                parentFrame.getContentPane().removeAll();
+                parentFrame.add(new GamePanel());
+                parentFrame.revalidate();
+                parentFrame.repaint();
+            }
+        }
