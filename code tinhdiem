@@ -1,1 +1,36 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class Player {
+    private int x, y;
+    private int width = 50, height = 50;
+    private int speed = 5;
+    private Image image;
+
+    public Player(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.image = new ImageIcon("src/resources/mb.jpg").getImage();
+    }
+
+    public void moveLeft() {
+        if (x > 0) x -= speed;
+    }
+
+    public void moveRight() {
+        if (x < 750) x += speed;
+    }
+
+    public Bullet shoot() {
+        return new Bullet(x + width / 2 - 5, y);
+    }
+
+    public void draw(Graphics g) {
+        g.drawImage(image, x, y, width, height, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+}
 
