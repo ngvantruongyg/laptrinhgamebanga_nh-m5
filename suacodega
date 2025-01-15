@@ -1,0 +1,44 @@
+import java.awt.*;
+import java.util.Random;
+import javax.swing.ImageIcon;
+
+public class Chicken {
+    private int x, y, width, height, speedX, speedY;
+    private Image chickenImage;
+    private Random random;
+
+    public Chicken(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.width = 100; // Kích thước gà
+        this.height = 100;
+        this.chickenImage = new ImageIcon("src/resources/ga2d.png").getImage();
+
+        random = new Random();
+        // Tốc độ ngẫu nhiên theo cả trục X và Y
+        this.speedX = random.nextInt(5) + 2; // Giá trị ngẫu nhiên từ 2 đến 6
+        this.speedY = random.nextInt(5) + 2;
+    }
+
+    public void move() {
+        // Di chuyển gà
+        x += speedX;
+        y += speedY;
+
+        // Đảo hướng nếu chạm ranh giới màn hình
+        if (x <= 0 || x + width >= 1900) { // 1900 là chiều rộng màn hình
+            speedX = -speedX; // Đổi chiều di chuyển trục X
+        }
+        if (y <= 0 || y + height >= 600) { // 600 là nửa trên của màn hình (giới hạn Y)
+            speedY = -speedY; // Đổi chiều di chuyển trục Y
+        }
+    }
+
+    public void draw(Graphics g) {
+        g.drawImage(chickenImage, x, y, width, height, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+}
