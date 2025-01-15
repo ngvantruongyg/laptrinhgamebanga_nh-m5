@@ -1,0 +1,10 @@
+private void startGame() {
+        isGameStarted = true;
+        isGameOver = false;
+        isPaused = false;
+        startButton.setVisible(false);
+        exitButton.setVisible(false);
+        instructionsButton.setVisible(false);
+        backButton.setVisible(false);
+        timer.start();
+    }
