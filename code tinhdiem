@@ -1,36 +1,22 @@
-import java.awt.*;
-import javax.swing.*;
+@Override
+    public void keyTyped(KeyEvent e) {}
 
-public class Player {
-    private int x, y;
-    private int width = 50, height = 50;
-    private int speed = 5;
-    private Image image;
+    private void checkCollisions() {
+        bullets.removeIf(bullet -> {
+            for (Chicken chicken : chickens) {
+                if (bullet.getBounds().intersects(chicken.getBounds())) {
+                    chickens.remove(chicken);
+                    score += 20;
+                    return true;
+                }
+            }
+            return false;
+        });
 
-    public Player(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.image = new ImageIcon("src/resources/mb.jpg").getImage();
+        for (Chicken chicken : chickens) {
+            if (chicken.getBounds().intersects(player.getBounds())) {
+                isGameOver = true;
+                break;
+            }
+        }
     }
-
-    public void moveLeft() {
-        if (x > 0) x -= speed;
-    }
-
-    public void moveRight() {
-        if (x < 750) x += speed;
-    }
-
-    public Bullet shoot() {
-        return new Bullet(x + width / 2 - 5, y);
-    }
-
-    public void draw(Graphics g) {
-        g.drawImage(image, x, y, width, height, null);
-    }
-
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
-    }
-}
-
