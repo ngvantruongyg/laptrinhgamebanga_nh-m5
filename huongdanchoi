@@ -1,0 +1,19 @@
+private void showInstructions() {
+        JFrame instructionsFrame = new JFrame("Hướng dẫn trò chơi");
+        instructionsFrame.setSize(600, 400);
+        instructionsFrame.setLocationRelativeTo(null);
+        instructionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JLabel instructionsLabel = new JLabel("<html><div style='text-align: center;'>"
+                + "<b>Cách chơi:</b><br>"
+                + "- Di chuyển chuột để điều khiển máy bay.<br>"
+                + "- Nhấn phím Space hoặc giữ chuột trái để bắn đạn.<br>"
+                + "- Tiêu diệt hết gà để hoàn thành đợt.<br>"
+                + "- Nhấn phím P để tạm dừng.<br>"
+                + "- Nhấn phím Q để thoát trò chơi.<br>"
+                + "</div></html>", SwingConstants.CENTER);
+        instructionsLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+
+        instructionsFrame.add(instructionsLabel);
+        instructionsFrame.setVisible(true);
+    }
