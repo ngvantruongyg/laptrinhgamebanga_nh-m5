@@ -1,0 +1,11 @@
+    private void exitToMainMenu() {
+    timer.stop();
+    isGameStarted = false;
+    resetGame();
+    startButton.setVisible(true);
+    exitButton.setVisible(true);
+    instructionsButton.setVisible(true);
+    backButton.setVisible(false);
+    revalidate();
+    repaint();
+}
