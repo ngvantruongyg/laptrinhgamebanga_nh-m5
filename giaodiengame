@@ -1,0 +1,41 @@
+    public GamePanel() {
+        this.setFocusable(true);
+        this.addMouseMotionListener(this);
+        this.addKeyListener(this);
+
+        player = new Player(960, 900);
+        chickens = new LinkedList<>();
+        bullets = new LinkedList<>();
+        background = new ImageIcon("src/resources/nen3d.jpg").getImage();
+
+        // Tăng thời gian giữa các khung hình để giảm tải CPU
+        timer = new Timer(20, this);
+
+        spawnChickens();
+
+        startButton = new JButton("Bắt đầu trò chơi");
+        startButton.setBounds(860, 450, 200, 50);
+        startButton.setFont(new Font("Arial", Font.BOLD, 20));
+        startButton.addActionListener(e -> startGame());
+        this.setLayout(null);
+        this.add(startButton);
+
+        exitButton = new JButton("Thoát");
+        exitButton.setBounds(860, 520, 200, 50);
+        exitButton.setFont(new Font("Arial", Font.BOLD, 20));
+        exitButton.addActionListener(e -> System.exit(0));
+        this.add(exitButton);
+
+        instructionsButton = new JButton("Hướng dẫn");
+        instructionsButton.setBounds(860, 590, 200, 50);
+        instructionsButton.setFont(new Font("Arial", Font.BOLD, 20));
+        instructionsButton.addActionListener(e -> showInstructions());
+        this.add(instructionsButton);
+
+        backButton = new JButton("Trở về màn hình chính");
+        backButton.setBounds(860, 660, 200, 50);
+        backButton.setFont(new Font("Arial", Font.BOLD, 20));
+        backButton.addActionListener(e -> exitToMainMenu());
+        backButton.setVisible(false);
+        this.add(backButton);
+    }
